@@ -117,12 +117,14 @@ See `DATASOURCES.md` for official sources.
 
 ---
 
-## For Judges
+## Explore the Graph
 
-1. **Open Aura Console:** https://console.neo4j.io
+Want to see how LifeGraph reasons? Access the agent backend directly:
+
+1. **Open Neo4j Console:** https://console.neo4j.io
 2. **Navigate to Agents** → LifeGraph agents
 3. **Try this query:** "I'm 19 in Oakland, aged out of foster care. What's my best path?"
-4. **Watch reasoning trace:** See how agents traverse the graph
+4. **Watch reasoning trace:** See how agents traverse the knowledge graph to find your path
 
 ---
 
