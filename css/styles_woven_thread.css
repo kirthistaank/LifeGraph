@@ -1,0 +1,688 @@
+/* LifeGraph — Design 4: Conversational Chat Theme */
+
+/* ============================================================
+   FONTS
+   ============================================================ */
+   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+   /* ============================================================
+      GLOBAL BASE
+      ============================================================ */
+   
+   html, body, [data-testid="stAppViewContainer"] {
+       background-color: #0b0b14 !important;
+       color: #e0e0ea !important;
+       font-family: 'Inter', sans-serif !important;
+   }
+   
+   [data-testid="stHeader"] {
+       background-color: #0b0b14 !important;
+       border-bottom: 1px solid rgba(177,156,217,0.08) !important;
+   }
+   
+   [data-testid="stAppViewContainer"] > .main > .block-container {
+       padding: 1rem 1.5rem 2rem 1.5rem !important;
+       max-width: 100% !important;
+   }
+   
+   /* Hide Streamlit top decoration */
+   #MainMenu, footer, [data-testid="stToolbar"] { display: none !important; }
+
+   /* ============================================================
+      CUSTOM SCROLLBAR (Claude.ai style)
+      ============================================================ */
+
+   /* For webkit browsers (Chrome, Safari, Edge) */
+   ::-webkit-scrollbar {
+       width: 8px !important;
+   }
+
+   ::-webkit-scrollbar-track {
+       background: transparent !important;
+   }
+
+   ::-webkit-scrollbar-thumb {
+       background: rgba(177, 156, 217, 0.3) !important;
+       border-radius: 4px !important;
+       transition: background 0.2s !important;
+   }
+
+   ::-webkit-scrollbar-thumb:hover {
+       background: rgba(177, 156, 217, 0.6) !important;
+   }
+
+   /* For Firefox */
+   * {
+       scrollbar-color: rgba(177, 156, 217, 0.3) transparent !important;
+       scrollbar-width: thin !important;
+   }
+   
+   /* ============================================================
+      SIDEBAR
+      ============================================================ */
+   
+   [data-testid="stSidebar"] {
+       background-color: #08080f !important;
+       border-right: 1px solid rgba(177,156,217,0.1) !important;
+   }
+   
+   [data-testid="stSidebar"] > div:first-child {
+       padding: 1.2rem 1rem !important;
+   }
+   
+   /* Sidebar text */
+   [data-testid="stSidebar"] p,
+   [data-testid="stSidebar"] div,
+   [data-testid="stSidebar"] span {
+       color: #c0c0d4 !important;
+   }
+   
+   /* Sidebar labels */
+   [data-testid="stSidebar"] label,
+   [data-testid="stSidebar"] .stSelectbox label,
+   [data-testid="stSidebar"] .stNumberInput label,
+   [data-testid="stSidebar"] .stTextInput label,
+   [data-testid="stSidebar"] .stMultiSelect label {
+       font-size: 0.7em !important;
+       font-weight: 600 !important;
+       letter-spacing: 0.08em !important;
+       text-transform: uppercase !important;
+       color: #4a4a6e !important;
+   }
+   
+   /* Sidebar inputs */
+   [data-testid="stSidebar"] input,
+   [data-testid="stSidebar"] [data-baseweb="select"] > div,
+   [data-testid="stSidebar"] [data-baseweb="input"] > div {
+       background-color: #10101e !important;
+       border: 1px solid rgba(177,156,217,0.18) !important;
+       border-radius: 7px !important;
+       color: #e0e0ea !important;
+       font-size: 0.88em !important;
+   }
+   
+   [data-testid="stSidebar"] [data-baseweb="select"] svg,
+   [data-testid="stSidebar"] [data-baseweb="input"] svg {
+       fill: #6a6a8e !important;
+   }
+   
+   /* Sidebar select dropdown text */
+   [data-testid="stSidebar"] [data-baseweb="select"] [data-testid="stMarkdownContainer"] p {
+       color: #e0e0ea !important;
+       font-size: 0.88em !important;
+   }
+   
+   /* Sidebar multiselect tags */
+   [data-testid="stSidebar"] [data-baseweb="tag"] {
+       background: rgba(177,156,217,0.15) !important;
+       border: 1px solid rgba(177,156,217,0.3) !important;
+   }
+   
+   [data-testid="stSidebar"] [data-baseweb="tag"] span {
+       color: #b19cd9 !important;
+   }
+   
+   /* ============================================================
+      SIDEBAR AGENT SWITCHER BUTTONS
+      The st.button renders with its own wrapper; we hide its
+      native look and use the HTML card above it as the visual.
+      ============================================================ */
+   
+   /* Sidebar clear button */
+   [data-testid="stSidebar"] .stButton > button {
+       position: relative !important;
+       opacity: 1 !important;
+       width: 100% !important;
+       background: transparent !important;
+       border: 1px solid rgba(177,156,217,0.1) !important;
+       border-radius: 6px !important;
+       color: #3e3e5e !important;
+       font-size: 0.76em !important;
+       padding: 0.35em 0.8em !important;
+       transition: all 0.15s !important;
+       cursor: pointer !important;
+   }
+   
+   [data-testid="stSidebar"] .stButton > button:hover {
+       border-color: rgba(177,156,217,0.25) !important;
+       color: #7a7a9e !important;
+   }
+   
+   /* ── Radio agent switcher ── */
+   [data-testid="stSidebar"] .stRadio > div {
+       gap: 4px !important;
+   }
+   
+   /* Each radio option row */
+   [data-testid="stSidebar"] .stRadio [data-baseweb="radio"] {
+       padding: 9px 12px !important;
+       border-radius: 8px !important;
+       border: 1px solid rgba(177,156,217,0.15) !important;
+       background: rgba(177,156,217,0.04) !important;
+       margin-bottom: 4px !important;
+       transition: all 0.15s !important;
+       cursor: pointer !important;
+       align-items: center !important;
+   }
+   
+   [data-testid="stSidebar"] .stRadio [data-baseweb="radio"]:hover {
+       background: rgba(177,156,217,0.1) !important;
+       border-color: rgba(177,156,217,0.35) !important;
+   }
+   
+   /* The radio circle dot — keep visible, style it */
+   [data-testid="stSidebar"] .stRadio [data-baseweb="radio"] > div:first-child {
+       display: flex !important;
+       width: 14px !important;
+       height: 14px !important;
+       flex-shrink: 0 !important;
+   }
+   
+   /* Dot border color */
+   [data-testid="stSidebar"] .stRadio [data-baseweb="radio"] [role="radio"] {
+       border-color: rgba(177,156,217,0.4) !important;
+       background: transparent !important;
+   }
+   
+   /* Label text — bright enough to read */
+   [data-testid="stSidebar"] .stRadio label {
+       font-size: 0.85em !important;
+       font-weight: 500 !important;
+       color: #9090b4 !important;
+       cursor: pointer !important;
+       text-transform: none !important;
+       letter-spacing: 0 !important;
+       padding: 0 !important;
+       border: none !important;
+       background: transparent !important;
+       margin: 0 !important;
+   }
+   
+   [data-testid="stSidebar"] .stRadio [data-testid="stMarkdownContainer"] p {
+       font-size: 1em !important;
+       color: inherit !important;
+       text-transform: none !important;
+       letter-spacing: 0 !important;
+       line-height: 1.35 !important;
+   }
+   
+   /* Selected option row */
+   [data-testid="stSidebar"] .stRadio [data-baseweb="radio"][aria-checked="true"],
+   [data-testid="stSidebar"] .stRadio [data-baseweb="radio"]:has([aria-checked="true"]) {
+       background: rgba(177,156,217,0.13) !important;
+       border-color: rgba(177,156,217,0.45) !important;
+       border-left: 3px solid #b19cd9 !important;
+   }
+   
+   /* Selected label text */
+   [data-testid="stSidebar"] .stRadio [data-baseweb="radio"][aria-checked="true"] label,
+   [data-testid="stSidebar"] .stRadio [data-baseweb="radio"]:has([aria-checked="true"]) label {
+       color: #c8b8f0 !important;
+       font-weight: 600 !important;
+   }
+   
+   /* Selected dot fill */
+   [data-testid="stSidebar"] .stRadio [data-baseweb="radio"]:has([aria-checked="true"]) [role="radio"] {
+       border-color: #b19cd9 !important;
+       background: #b19cd9 !important;
+   }
+   
+   /* ============================================================
+      CUSTOM HTML CLASSES — SIDEBAR
+      ============================================================ */
+   
+   .lg-wordmark {
+       font-size: 1.3em;
+       font-weight: 700;
+       color: #b19cd9;
+       letter-spacing: -0.02em;
+       line-height: 1;
+       margin-bottom: 2px;
+   }
+   
+   .lg-tagline {
+       font-size: 0.7em;
+       color: #3e3e5e;
+       letter-spacing: 0.02em;
+       margin-bottom: 1.2rem;
+       padding-bottom: 1rem;
+       border-bottom: 1px solid rgba(177,156,217,0.08);
+   }
+   
+   .lg-section-label {
+       font-size: 0.64em;
+       font-weight: 700;
+       letter-spacing: 0.12em;
+       text-transform: uppercase;
+       color: #3e3e5e;
+       margin: 1rem 0 0.4rem 0;
+       display: block;
+   }
+   
+   .lg-agent-card {
+       display: flex;
+       align-items: center;
+       gap: 10px;
+       padding: 8px 10px;
+       border-radius: 8px;
+       border: 1px solid transparent;
+       margin-bottom: 3px;
+       transition: all 0.15s;
+       cursor: pointer;
+   }
+   
+   .lg-agent-card:hover {
+       background: rgba(177,156,217,0.06);
+       border-color: rgba(177,156,217,0.12);
+   }
+   
+   .lg-agent-card.active {
+       background: rgba(177,156,217,0.1);
+       border-color: rgba(177,156,217,0.28);
+   }
+   
+   .lg-agent-dot {
+       width: 8px;
+       height: 8px;
+       border-radius: 50%;
+       flex-shrink: 0;
+   }
+   
+   .lg-agent-card-name {
+       font-size: 0.84em;
+       font-weight: 600;
+       color: #a0a0c0;
+       line-height: 1.2;
+   }
+   
+   .lg-agent-card.active .lg-agent-card-name {
+       color: #b19cd9;
+   }
+   
+   .lg-agent-card-sub {
+       font-size: 0.68em;
+       color: #3e3e5e;
+       margin-top: 1px;
+   }
+   
+   .lg-divider {
+       border: none;
+       border-top: 1px solid rgba(177,156,217,0.08);
+       margin: 0.9rem 0;
+   }
+   
+   .lg-query-preview {
+       margin-top: 0.6rem;
+       font-size: 0.72em;
+       color: #4a4a6e;
+       background: #0d0d1a;
+       border: 1px solid rgba(177,156,217,0.08);
+       border-radius: 6px;
+       padding: 8px 10px;
+       font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+       line-height: 1.55;
+       word-break: break-word;
+   }
+   
+   .lg-status {
+       display: flex;
+       align-items: center;
+       gap: 6px;
+       font-size: 0.68em;
+       color: #3e3e5e;
+       margin-top: 0.8rem;
+       padding-top: 0.8rem;
+       border-top: 1px solid rgba(177,156,217,0.06);
+   }
+   
+   .lg-status-dot {
+       width: 5px;
+       height: 5px;
+       border-radius: 50%;
+       background: #3db870;
+       flex-shrink: 0;
+       box-shadow: 0 0 4px rgba(61,184,112,0.6);
+   }
+   
+   /* ============================================================
+      MAIN AREA — CHAT HEADER BAR
+      ============================================================ */
+   
+   .lg-chat-header {
+       display: flex;
+       align-items: center;
+       gap: 12px;
+       padding: 12px 20px;
+       background: #0a0a12;
+       border: 1px solid rgba(177,156,217,0.1);
+       border-bottom: none;
+       border-radius: 12px 12px 0 0;
+   }
+   
+   .lg-chat-avatar {
+       width: 32px;
+       height: 32px;
+       border-radius: 50%;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       font-size: 0.75em;
+       font-weight: 700;
+       flex-shrink: 0;
+   }
+   
+   .lg-chat-name {
+       font-size: 0.92em;
+       font-weight: 600;
+       color: #c8c8e0;
+       line-height: 1.2;
+   }
+   
+   .lg-chat-online {
+       font-size: 0.68em;
+       color: #3db870;
+       display: flex;
+       align-items: center;
+       gap: 4px;
+       margin-top: 1px;
+   }
+   
+   .lg-chat-online::before {
+       content: '';
+       width: 5px;
+       height: 5px;
+       border-radius: 50%;
+       background: #3db870;
+       display: inline-block;
+       box-shadow: 0 0 4px rgba(61,184,112,0.6);
+   }
+   
+   /* ============================================================
+      MESSAGE SCROLL AREA (st.container with height)
+      ============================================================ */
+   
+   /* The container Streamlit renders for st.container(height=...) */
+   [data-testid="stVerticalBlockBorderWrapper"] {
+       border: 1px solid rgba(177,156,217,0.1) !important;
+       border-top: none !important;
+       border-bottom: none !important;
+       border-radius: 0 !important;
+       background: #0b0b14 !important;
+       padding: 0 !important;
+   }
+   
+   /* The inner scrollable div */
+   [data-testid="stVerticalBlockBorderWrapper"] > div {
+       background: #0b0b14 !important;
+       padding: 1.2rem 1.4rem !important;
+   }
+   
+   /* ============================================================
+      MESSAGE BUBBLES
+      ============================================================ */
+   
+   .lg-msg-wrap {
+       display: flex;
+       gap: 10px;
+       align-items: flex-start;
+       margin-bottom: 1.1rem;
+   }
+   
+   .lg-msg-wrap.user {
+       flex-direction: row-reverse;
+   }
+   
+   .lg-avatar {
+       width: 30px;
+       height: 30px;
+       border-radius: 50%;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       font-size: 0.68em;
+       font-weight: 700;
+       flex-shrink: 0;
+       margin-top: 2px;
+   }
+   
+   .lg-bubble {
+       max-width: 74%;
+       padding: 11px 15px;
+       font-size: 0.9em;
+       line-height: 1.65;
+       word-break: break-word;
+   }
+   
+   /* Agent bubble — left, flat corner top-left */
+   .lg-bubble.agent {
+       background: #13131f;
+       border: 1px solid rgba(177,156,217,0.12);
+       border-radius: 2px 14px 14px 14px;
+       color: #c8c8e0;
+   }
+   
+   /* User bubble — right, flat corner top-right */
+   .lg-bubble.user {
+       background: #1e1640;
+       border: 1px solid rgba(177,156,217,0.22);
+       border-radius: 14px 2px 14px 14px;
+       color: #d0c4f4;
+   }
+   
+   /* Welcome bubble — centered, subtle */
+   .lg-bubble.welcome {
+       background: #0d0d18;
+       border: 1px solid rgba(177,156,217,0.07);
+       border-radius: 10px;
+       color: #4a4a6e;
+       font-size: 0.84em;
+       font-style: italic;
+       max-width: 88%;
+       margin: 0 auto;
+       text-align: center;
+       padding: 12px 18px;
+   }
+   
+   /* Error bubble */
+   .lg-bubble.error {
+       background: #160808;
+       border: 1px solid rgba(220,60,60,0.25);
+       border-radius: 2px 14px 14px 14px;
+       color: #e08080;
+   }
+   
+   .lg-ts {
+       font-size: 0.64em;
+       color: #2e2e4a;
+       margin-top: 4px;
+       padding: 0 3px;
+   }
+   
+   .user .lg-ts { text-align: right; }
+   
+   /* Content inside agent bubble — style markdown elements */
+   .lg-bubble.agent strong { color: #d0c4f4; font-weight: 600; }
+   .lg-bubble.agent em { color: #a090d0; }
+   .lg-bubble.agent code {
+       background: #1a1a30;
+       border: 1px solid rgba(177,156,217,0.15);
+       border-radius: 4px;
+       padding: 1px 5px;
+       font-size: 0.87em;
+       color: #b19cd9;
+       font-family: 'JetBrains Mono', monospace;
+   }
+   .lg-bubble.agent ul, .lg-bubble.agent ol {
+       margin: 0.4em 0 0.4em 1.2em;
+       padding: 0;
+   }
+   .lg-bubble.agent li { margin-bottom: 0.25em; }
+   .lg-bubble.agent h1, .lg-bubble.agent h2, .lg-bubble.agent h3 {
+       color: #c8c8e0;
+       font-weight: 600;
+       margin: 0.7em 0 0.3em;
+   }
+   .lg-bubble.agent p { margin: 0 0 0.5em; }
+   .lg-bubble.agent p:last-child { margin-bottom: 0; }
+   
+   /* ============================================================
+      INPUT BAR AT BOTTOM
+      ============================================================ */
+   
+   .lg-input-bar {
+       display: flex;
+       align-items: center;
+       gap: 10px;
+       padding: 12px 20px;
+       background: #0a0a12;
+       border: 1px solid rgba(177,156,217,0.1);
+       border-top: none;
+       border-radius: 0 0 12px 12px;
+   }
+   
+   /* Override the Ask Agent primary button to match design */
+   .lg-input-bar-btn .stButton > button {
+       background: rgba(177,156,217,0.1) !important;
+       border: 1px solid rgba(177,156,217,0.35) !important;
+       color: #b19cd9 !important;
+       font-weight: 600 !important;
+       font-size: 0.84em !important;
+       letter-spacing: 0.05em !important;
+       border-radius: 8px !important;
+       padding: 0.5em 1.6em !important;
+       transition: all 0.15s !important;
+       white-space: nowrap !important;
+   }
+   
+   .lg-input-bar-btn .stButton > button:hover {
+       background: rgba(177,156,217,0.2) !important;
+       border-color: rgba(177,156,217,0.6) !important;
+       box-shadow: 0 0 14px rgba(177,156,217,0.18) !important;
+   }
+   
+   /* Clear button in sidebar */
+   [data-testid="stSidebar"] .lg-clear-btn .stButton > button {
+       opacity: 1 !important;
+       position: relative !important;
+       background: transparent !important;
+       border: 1px solid rgba(177,156,217,0.12) !important;
+       color: #3e3e5e !important;
+       font-size: 0.76em !important;
+       border-radius: 6px !important;
+       padding: 0.35em 0.8em !important;
+       width: 100% !important;
+       height: auto !important;
+       transition: all 0.15s !important;
+   }
+   
+   [data-testid="stSidebar"] .lg-clear-btn .stButton > button:hover {
+       border-color: rgba(177,156,217,0.25) !important;
+       color: #7a7a9e !important;
+   }
+   
+   /* ============================================================
+      REASONING EXPANDER
+      ============================================================ */
+   
+   .lg-reasoning {
+       margin-top: 10px;
+       padding: 10px 13px;
+       background: #0c0a04;
+       border-left: 3px solid #c47c10;
+       border-radius: 0 6px 6px 0;
+       font-size: 0.84em;
+       color: #c09040;
+       line-height: 1.6;
+   }
+   
+   [data-testid="stExpander"] {
+       background: #0e0e1c !important;
+       border: 1px solid rgba(177,156,217,0.1) !important;
+       border-radius: 8px !important;
+       margin-top: 8px !important;
+   }
+   
+   [data-testid="stExpander"] summary,
+   [data-testid="stExpander"] summary p {
+       color: #6a5eaa !important;
+       font-size: 0.82em !important;
+   }
+   
+   /* ============================================================
+      MAIN AREA — MISC OVERRIDES
+      ============================================================ */
+   
+   /* All primary buttons in main area */
+   .stButton > button[kind="primary"] {
+       background: rgba(177,156,217,0.1) !important;
+       border: 1px solid rgba(177,156,217,0.35) !important;
+       color: #b19cd9 !important;
+       font-weight: 600 !important;
+       border-radius: 8px !important;
+       transition: all 0.15s !important;
+   }
+   
+   .stButton > button[kind="primary"]:hover {
+       background: rgba(177,156,217,0.2) !important;
+       border-color: rgba(177,156,217,0.6) !important;
+   }
+   
+   /* All secondary/default buttons */
+   .stButton > button {
+       background: transparent !important;
+       border: 1px solid rgba(177,156,217,0.12) !important;
+       color: #4a4a6e !important;
+       border-radius: 8px !important;
+       transition: all 0.15s !important;
+   }
+   
+   .stButton > button:hover {
+       border-color: rgba(177,156,217,0.28) !important;
+       color: #8878b8 !important;
+   }
+   
+   /* Spinner text */
+   [data-testid="stSpinner"] p { color: #6a5eaa !important; }
+   
+   /* Config warning */
+   .lg-config-warning {
+       background: #110d04;
+       border: 1px solid rgba(220,150,40,0.25);
+       border-left: 3px solid #c47c10;
+       border-radius: 8px;
+       padding: 14px 18px;
+       color: #c09040;
+       font-size: 0.88em;
+       line-height: 1.7;
+   }
+   
+   .lg-config-warning code {
+       background: rgba(196,124,16,0.12);
+       border-radius: 4px;
+       padding: 1px 5px;
+       color: #e0a030;
+       font-size: 0.9em;
+   }
+   
+   /* Footer */
+   .lg-footer {
+       text-align: center;
+       color: #252535;
+       font-size: 0.72em;
+       margin-top: 1rem;
+       line-height: 1.9;
+       padding-top: 0.5rem;
+       border-top: 1px solid rgba(177,156,217,0.05);
+   }
+   
+   /* hr */
+   hr {
+       border: none !important;
+       border-top: 1px solid rgba(177,156,217,0.07) !important;
+       margin: 0.6rem 0 !important;
+   }
+   
+   /* Scrollbar global */
+   ::-webkit-scrollbar { width: 4px; height: 4px; }
+   ::-webkit-scrollbar-track { background: transparent; }
+   ::-webkit-scrollbar-thumb { background: rgba(177,156,217,0.18); border-radius: 2px; }
