@@ -69,6 +69,7 @@ Outcome: Income + housing = financial stability within 6 months
 
 - **`LIFEGRAPH_SUBMISSION.md`** - Hackathon submission (technical details)
 - **`README.md`** - This file (quick overview)
+- **`DESIGN_PATTERNS.md`** - AI architectural patterns powering the system
 - **`DATASOURCES.md`** - Where data came from (6 official sources)
 - **`ARCHITECTURE.md`** - Graph schema and relationship types
 - **`GETTING_STARTED.md`** - How to set up locally
@@ -171,6 +172,7 @@ Traditional resource navigator: "You might qualify for CalFresh, Job Corps, Hous
 ## See Also
 
 - **Full submission:** `LIFEGRAPH_SUBMISSION.md`
+- **Design patterns:** `DESIGN_PATTERNS.md` — Eight AI architecture patterns that power the system
 - **Data sources:** `DATASOURCES.md`
 - **Graph design:** `ARCHITECTURE.md`
 - **Setup guide:** `GETTING_STARTED.md`

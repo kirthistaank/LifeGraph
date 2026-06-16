@@ -373,6 +373,7 @@ RETURN org.name, org.contact, org.location
 
 ## See Also
 
+- **Design Patterns:** `DESIGN_PATTERNS.md` — The AI architectural patterns powering this schema
 - **Data Sources:** `DATASOURCES.md`
 - **Setup Guide:** `GETTING_STARTED.md`
 - **Full Submission:** `../submission/FINAL_SUBMISSION.md`

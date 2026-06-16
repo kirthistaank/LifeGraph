@@ -385,6 +385,26 @@ Modify:
 
 ---
 
+## Understanding the Design Patterns
+
+LifeGraph is built on eight core AI architecture patterns. Understanding these helps you modify and extend the system effectively.
+
+**See `DESIGN_PATTERNS.md` for detailed documentation on:**
+- **ReAct (Reasoning + Acting)** — How agents observe and reason iteratively
+- **Plan-Execute Decomposition** — Multi-phase task reasoning
+- **Agent Orchestration** — Why three specialist agents instead of one
+- **Graph-Augmented LLM** — How the graph prevents hallucination
+- **Multi-Hop Traversal** — Discovering hidden program sequences
+- **Template-Based Reasoning** — Pre-built query patterns
+- **Conversation Context Management** — Multi-turn dialogue
+- **Domain-Specific Reasoning** — Knowledge encoded in the graph
+
+**Quick takeaway:** These patterns work together to make LifeGraph reliable (grounded in verified data), intelligent (reasoning over relationships), and maintainable (domain knowledge is the graph structure, not buried in prompts).
+
+For developers modifying agent behavior or extending the graph, understanding these patterns will help you make better architectural decisions.
+
+---
+
 ## Next Steps
 
 After setup:
